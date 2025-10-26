@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(opam --version:*)",
+      "Bash(ocaml:*)",
+      "Bash(ocamlc:*)",
+      "Bash(opam switch:*)",
+      "Bash(brew install:*)",
+      "Bash(pkill:*)",
+      "Bash(/opt/homebrew/opt/postgresql@15/bin/psql:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

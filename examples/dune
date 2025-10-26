@@ -1,0 +1,4 @@
+(executable
+ (name simple_simulation)
+ (libraries core async core_types strategies simulation)
+ (preprocess (pps ppx_jane)))

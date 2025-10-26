@@ -1,0 +1,4 @@
+(library
+ (name core_types)
+ (libraries core core_kernel core_unix.time_ns_unix)
+ (preprocess (pps ppx_jane)))

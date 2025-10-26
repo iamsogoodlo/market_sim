@@ -1,0 +1,6 @@
+(executable
+ (name server)
+ (public_name market_sim_server)
+ (libraries market_sim core_types dream lwt yojson core core_unix postgresql)
+ (preprocess (pps ppx_jane lwt_ppx))
+ (modules server db))

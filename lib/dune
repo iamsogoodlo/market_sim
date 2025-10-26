@@ -1,0 +1,5 @@
+(library
+ (name market_sim)
+ (public_name market_sim)
+ (libraries core async core_unix incremental yojson lwt)
+ (preprocess (pps ppx_jane)))

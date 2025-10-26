@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MarketSim - Stock Trading Platform</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0a0e27;
+      color: #e0e0e0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Login Screen */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .loginCard {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      width: 400px;
+      color: #333;
+    }
+
+    .loginCard h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .loginCard p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .formGroup {
+      margin-bottom: 20px;
+    }
+
+    .formGroup label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .formGroup input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .formGroup input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .loginBtn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .loginBtn:hover {
+      transform: translateY(-2px);
+    }
+
+    .loginBtn:active {
+      transform: translateY(0);
+    }
+
+    .switchMode {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+    }
+
+    .switchMode a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Main App */
+    #mainApp {
+      display: none;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #1a1f3a;
+      padding: 0 30px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #2a2f4a;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cashBalance {
+      background: #2a2f4a;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .cashBalance span {
+      color: #4ade80;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .logoutBtn {
+      padding: 10px 20px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    .mainContent {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Left Panel - Stock Search & Info */
+    .leftPanel {
+      width: 400px;
+      background: #131729;
+      border-right: 1px solid #2a2f4a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .searchBox {
+      padding: 20px;
+      border-bottom: 1px solid #2a2f4a;
+    }
+
+    .searchBox input {
+      width: 100%;
+      padding: 12px 16px;
+      background: #1a1f3a;
+      border: 2px solid #2a2f4a;
+      border-radius: 10px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .searchBox input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .searchResults {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #1a1f3a;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .searchResultItem {
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #2a2f4a;
+      transition: background 0.2s;
+    }
+
+    .searchResultItem:hover {
+      background: #2a2f4a;
+    }
+
+    .searchResultItem .symbol {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .searchResultItem .name {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .stockInfo {
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .currentStock {
+      background: #1a1f3a;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stockSymbol {
+      font-size: 28px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+
+    .stockPrice {
+      font-size: 36px;
+      font-weight: bold;
+      color: #4ade80;
+    }
+
+    .priceChange {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .priceChange.positive {
+      color: #4ade80;
+    }
+
+    .priceChange.negative {
+      color: #ef4444;
+    }
+
+    /* Middle Panel - Chart */
+    .middlePanel {
+      flex: 1;
+      background: #0a0e27;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .chartContainer {
+      flex: 1;
+      background: #131729;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .chartControls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .chartBtn {
+      padding: 8px 16px;
+      background: #1a1f3a;
+      color: #888;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chartBtn.active {
+      background: #667eea;
+      color: white;
+    }
+
+    #priceChart {
+      max-height: 400px;
+    }
+
+    /* Trading Panel */
+    .tradingPanel {
+      background: #131729;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .tradeTabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tradeTab {
+      flex: 1;
+      padding: 12px;
+      background: #1a1f3a;
+      border: none;
+      border-radius: 10px;
+      color: #888;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .tradeTab.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .tradeForm {
+      display: flex;
+      gap: 15px;
+      align-items: flex-end;
+    }
+
+    .tradeInput {
+      flex: 1;
+    }
+
+    .tradeInput label {
+      display: block;
+      margin-bottom: 8px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    .tradeInput input {
+      width: 100%;
+      padding: 12px;
+      background: #1a1f3a;
+      border: 2px solid #2a2f4a;
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .tradeInput input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .tradeBtn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .tradeBtn.buy {
+      background: #4ade80;
+      color: white;
+    }
+
+    .tradeBtn.sell {
+      background: #ef4444;
+      color: white;
+    }
+
+    .tradeBtn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Right Panel - Portfolio & Orders */
+    .rightPanel {
+      width: 350px;
+      background: #131729;
+      border-left: 1px solid #2a2f4a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panelTabs {
+      display: flex;
+      border-bottom: 1px solid #2a2f4a;
+    }
+
+    .panelTab {
+      flex: 1;
+      padding: 15px;
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .panelTab.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+    }
+
+    .panelContent {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .portfolioItem {
+      background: #1a1f3a;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .portfolioItem .symbol {
+      font-weight: 600;
+      color: #667eea;
+      font-size: 16px;
+    }
+
+    .portfolioItem .quantity {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .portfolioItem .value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4ade80;
+      margin-top: 5px;
+    }
+
+    .orderItem {
+      background: #1a1f3a;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid;
+    }
+
+    .orderItem.buy {
+      border-left-color: #4ade80;
+    }
+
+    .orderItem.sell {
+      border-left-color: #ef4444;
+    }
+
+    .orderItem .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .orderItem .symbol {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .orderItem .side {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .orderItem.buy .side {
+      color: #4ade80;
+    }
+
+    .orderItem.sell .side {
+      color: #ef4444;
+    }
+
+    .orderItem .details {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .emptyState {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .emptyState svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="loginScreen">
+  <div class="loginCard">
+    <h1>MarketSim</h1>
+    <p>Trade stocks with real market data</p>
+    <div id="loginForm">
+      <div class="formGroup">
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter username">
+      </div>
+      <div class="formGroup">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+      </div>
+      <button class="loginBtn" onclick="handleLogin()">Sign In</button>
+      <div class="switchMode">
+        Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a>
+      </div>
+    </div>
+    <div id="signupForm" style="display:none;">
+      <div class="formGroup">
+        <label>Username</label>
+        <input type="text" id="signupUsername" placeholder="Choose username">
+      </div>
+      <div class="formGroup">
+        <label>Email</label>
+        <input type="email" id="signupEmail" placeholder="Enter email">
+      </div>
+      <div class="formGroup">
+        <label>Password</label>
+        <input type="password" id="signupPassword" placeholder="Choose password">
+      </div>
+      <button class="loginBtn" onclick="handleSignup()">Create Account</button>
+      <div class="switchMode">
+        Already have an account? <a href="#" onclick="showLogin()">Sign In</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="mainApp">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">MarketSim</div>
+    <div class="userInfo">
+      <div class="cashBalance">
+        Cash: $<span id="cashBalance">100,000.00</span>
+      </div>
+      <button class="logoutBtn" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="mainContent">
+    <!-- Left Panel -->
+    <div class="leftPanel">
+      <div class="searchBox">
+        <input type="text" id="stockSearch" placeholder="Search stocks..." oninput="handleStockSearch(this.value)">
+        <div class="searchResults" id="searchResults"></div>
+      </div>
+      <div class="stockInfo">
+        <div class="currentStock">
+          <div class="stockSymbol" id="currentSymbol">AAPL</div>
+          <div class="stockPrice" id="currentPrice">$175.00</div>
+          <div class="priceChange positive" id="priceChange">+$2.50 (+1.45%)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Panel -->
+    <div class="middlePanel">
+      <div class="chartContainer">
+        <div class="chartControls">
+          <button class="chartBtn active" onclick="loadChart('1mo')">1M</button>
+          <button class="chartBtn" onclick="loadChart('3mo')">3M</button>
+          <button class="chartBtn" onclick="loadChart('6mo')">6M</button>
+          <button class="chartBtn" onclick="loadChart('1y')">1Y</button>
+          <button class="chartBtn" onclick="loadChart('5y')">5Y</button>
+        </div>
+        <canvas id="priceChart"></canvas>
+      </div>
+
+      <div class="tradingPanel">
+        <div class="tradeTabs">
+          <button class="tradeTab active" onclick="setTradeTab('buy')">Buy</button>
+          <button class="tradeTab" onclick="setTradeTab('sell')">Sell</button>
+        </div>
+        <div class="tradeForm">
+          <div class="tradeInput">
+            <label>Quantity</label>
+            <input type="number" id="tradeQuantity" placeholder="0" min="1" value="10">
+          </div>
+          <div class="tradeInput">
+            <label>Price</label>
+            <input type="number" id="tradePrice" placeholder="Market" step="0.01">
+          </div>
+          <button class="tradeBtn buy" id="tradeButton" onclick="handleTrade()">Buy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="rightPanel">
+      <div class="panelTabs">
+        <button class="panelTab active" onclick="switchTab('portfolio')">Portfolio</button>
+        <button class="panelTab" onclick="switchTab('orders')">Orders</button>
+      </div>
+      <div class="panelContent" id="portfolioTab">
+        <div id="portfolioList"></div>
+      </div>
+      <div class="panelContent" id="ordersTab" style="display:none;">
+        <div id="ordersList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentUser = null;
+let currentSymbol = 'AAPL';
+let currentTradeSide = 'buy';
+let priceChart = null;
+let ws = null;
+
+function showLogin() {
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('signupForm').style.display = 'none';
+}
+
+function showSignup() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'block';
+}
+
+function handleLogin() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+
+  // For demo purposes, accept any login
+  currentUser = { username, cashBalance: 100000 };
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'flex';
+
+  initializeApp();
+}
+
+function handleSignup() {
+  const username = document.getElementById('signupUsername').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  // For demo purposes, auto-create account
+  currentUser = { username, email, cashBalance: 100000 };
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'flex';
+
+  initializeApp();
+}
+
+function handleLogout() {
+  currentUser = null;
+  if (ws) ws.close();
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('mainApp').style.display = 'none';
+  showLogin();
+}
+
+function initializeApp() {
+  updateCashBalance();
+  selectStock('AAPL');
+  connectWebSocket();
+  loadPortfolio();
+}
+
+function updateCashBalance() {
+  document.getElementById('cashBalance').textContent = currentUser.cashBalance.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function connectWebSocket() {
+  ws = new WebSocket('ws://localhost:8080/ws');
+
+  ws.onopen = () => {
+    console.log('WebSocket connected');
+    ws.send(JSON.stringify({ action: 'start' }));
+  };
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    handleWebSocketMessage(data);
+  };
+
+  ws.onerror = (error) => console.error('WebSocket error:', error);
+  ws.onclose = () => setTimeout(() => connectWebSocket(), 1000);
+}
+
+function handleWebSocketMessage(data) {
+  if (data.type === 'order') {
+    addOrderToList(data);
+  } else if (data.type === 'execution') {
+    updatePortfolioAfterExecution(data);
+  }
+}
+
+async function handleStockSearch(query) {
+  if (!query || query.length < 1) {
+    document.getElementById('searchResults').innerHTML = '';
+    return;
+  }
+
+  try {
+    // Fetch from API if query is specific, otherwise show popular stocks
+    let stocks;
+    if (query.length >= 2) {
+      const response = await fetch(`/api/stocks/search/${encodeURIComponent(query)}`);
+      stocks = await response.json();
+    } else {
+      // Show popular stocks for single character
+      const response = await fetch('/api/stocks/list');
+      const allStocks = await response.json();
+      stocks = allStocks.slice(0, 10).map(s => ({ symbol: s.symbol, name: s.name }));
+    }
+
+    const html = stocks.map(stock => `
+      <div class="searchResultItem" onclick="selectStock('${stock.symbol}')">
+        <div class="symbol">${stock.symbol}</div>
+        <div class="name">${stock.name || 'N/A'}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('searchResults').innerHTML = html || '<div style="padding:12px;color:#666;">No results</div>';
+  } catch (error) {
+    console.error('Search error:', error);
+    document.getElementById('searchResults').innerHTML = '<div style="padding:12px;color:#666;">Error searching</div>';
+  }
+}
+
+async function selectStock(symbol) {
+  currentSymbol = symbol;
+  document.getElementById('currentSymbol').textContent = symbol;
+  document.getElementById('stockSearch').value = '';
+  document.getElementById('searchResults').innerHTML = '';
+
+  // Fetch real stock quote
+  try {
+    const response = await fetch(`/api/stocks/quote/${symbol}`);
+    const quote = await response.json();
+
+    const price = quote.price || 100;
+    document.getElementById('currentPrice').textContent = `$${price.toFixed(2)}`;
+    document.getElementById('tradePrice').value = price;
+
+    // Update price change (calculate from previous close if available)
+    const change = Math.random() * 5 - 2.5; // Demo change for now
+    const changePercent = (change / price) * 100;
+    const priceChangeEl = document.getElementById('priceChange');
+    priceChangeEl.textContent = `${change >= 0 ? '+' : ''}$${change.toFixed(2)} (${changePercent.toFixed(2)}%)`;
+    priceChangeEl.className = `priceChange ${change >= 0 ? 'positive' : 'negative'}`;
+  } catch (error) {
+    console.error('Error fetching quote:', error);
+    document.getElementById('currentPrice').textContent = '$100.00';
+    document.getElementById('tradePrice').value = 100;
+  }
+
+  loadChart('1mo');
+}
+
+async function loadChart(period) {
+  // Update active button
+  document.querySelectorAll('.chartBtn').forEach(btn => btn.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+
+  try {
+    // Fetch real historical data
+    const response = await fetch(`/api/stocks/historical/${currentSymbol}/${period}`);
+    const historical = await response.json();
+
+    const labels = historical.map(d => {
+      const date = new Date(d.date);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+    const data = historical.map(d => d.close);
+
+    if (priceChart) priceChart.destroy();
+
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    priceChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: currentSymbol,
+          data,
+          borderColor: '#667eea',
+          backgroundColor: 'rgba(102, 126, 234, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: '#1a1f3a',
+            titleColor: '#e0e0e0',
+            bodyColor: '#e0e0e0',
+            borderColor: '#667eea',
+            borderWidth: 1,
+            callbacks: {
+              label: function(context) {
+                return '$' + context.parsed.y.toFixed(2);
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: '#888',
+              callback: function(value) {
+                return '$' + value.toFixed(0);
+              }
+            },
+            grid: { color: '#2a2f4a' }
+          },
+          x: {
+            ticks: { color: '#888', maxTicksLimit: 8 },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error loading chart:', error);
+    // Fallback to demo data if API fails
+    const basePrice = parseFloat(document.getElementById('currentPrice').textContent.replace('$', '')) || 100;
+    const days = { '1mo': 30, '3mo': 90, '6mo': 180, '1y': 365, '5y': 1825 }[period] || 30;
+    const labels = [];
+    const data = [];
+
+    for (let i = days; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      labels.push(date.toLocaleDateString());
+      data.push(basePrice + (Math.random() - 0.5) * 20);
+    }
+
+    if (priceChart) priceChart.destroy();
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    priceChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets: [{ label: currentSymbol, data, borderColor: '#667eea', backgroundColor: 'rgba(102, 126, 234, 0.1)', tension: 0.4, fill: true }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { color: '#888' }, grid: { color: '#2a2f4a' } }, x: { ticks: { color: '#888', maxTicksLimit: 8 }, grid: { display: false } } } }
+    });
+  }
+}
+
+function setTradeTab(side) {
+  currentTradeSide = side;
+  document.querySelectorAll('.tradeTab').forEach(tab => tab.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const button = document.getElementById('tradeButton');
+  button.className = `tradeBtn ${side}`;
+  button.textContent = side === 'buy' ? 'Buy' : 'Sell';
+}
+
+function handleTrade() {
+  const quantity = parseInt(document.getElementById('tradeQuantity').value);
+  const price = parseFloat(document.getElementById('tradePrice').value);
+
+  if (!quantity || !price || quantity <= 0 || price <= 0) {
+    alert('Please enter valid quantity and price');
+    return;
+  }
+
+  const order = {
+    action: 'place_order',
+    symbol: currentSymbol,
+    side: currentTradeSide,
+    orderType: 'limit',
+    price,
+    quantity,
+    traderId: currentUser.username
+  };
+
+  ws.send(JSON.stringify(order));
+
+  // Update cash balance (demo)
+  const totalCost = price * quantity;
+  if (currentTradeSide === 'buy') {
+    currentUser.cashBalance -= totalCost;
+  } else {
+    currentUser.cashBalance += totalCost;
+  }
+  updateCashBalance();
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.panelTab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.getElementById('portfolioTab').style.display = tab === 'portfolio' ? 'block' : 'none';
+  document.getElementById('ordersTab').style.display = tab === 'orders' ? 'block' : 'none';
+}
+
+function loadPortfolio() {
+  // Demo portfolio
+  const portfolio = [
+    { symbol: 'AAPL', quantity: 50, avgCost: 170, currentPrice: 175 },
+    { symbol: 'MSFT', quantity: 25, avgCost: 375, currentPrice: 380 }
+  ];
+
+  const html = portfolio.map(item => {
+    const value = item.quantity * item.currentPrice;
+    const gain = value - (item.quantity * item.avgCost);
+    const gainPercent = (gain / (item.quantity * item.avgCost)) * 100;
+
+    return `
+      <div class="portfolioItem">
+        <div class="symbol">${item.symbol}</div>
+        <div class="quantity">${item.quantity} shares @ $${item.avgCost.toFixed(2)}</div>
+        <div class="value">$${value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+        <div class="priceChange ${gain >= 0 ? 'positive' : 'negative'}">
+          ${gain >= 0 ? '+' : ''}$${gain.toFixed(2)} (${gainPercent.toFixed(2)}%)
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('portfolioList').innerHTML = html || '<div class="emptyState">No holdings yet</div>';
+}
+
+function addOrderToList(order) {
+  const ordersList = document.getElementById('ordersList');
+  const orderHtml = `
+    <div class="orderItem ${order.side}">
+      <div class="header">
+        <span class="symbol">${order.symbol}</span>
+        <span class="side">${order.side.toUpperCase()}</span>
+      </div>
+      <div class="details">${order.quantity} @ $${order.price.toFixed(2)}</div>
+    </div>
+  `;
+  ordersList.innerHTML = orderHtml + ordersList.innerHTML;
+}
+
+function updatePortfolioAfterExecution(execution) {
+  console.log('Execution:', execution);
+  loadPortfolio(); // Reload portfolio
+}
+
+// Initialize on load
+if (currentUser) {
+  initializeApp();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+(library
+ (name simulation)
+ (libraries core async core_types strategies)
+ (preprocess (pps ppx_jane)))

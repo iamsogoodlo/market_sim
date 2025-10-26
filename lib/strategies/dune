@@ -1,0 +1,4 @@
+(library
+ (name strategies)
+ (libraries core core_types)
+ (preprocess (pps ppx_jane)))

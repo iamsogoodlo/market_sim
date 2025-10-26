@@ -1,0 +1,4 @@
+(test
+ (name test_market_sim)
+ (libraries market_sim core async qcheck)
+ (preprocess (pps ppx_jane)))
