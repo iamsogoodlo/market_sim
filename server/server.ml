@@ -990,20 +990,20 @@ let () =
     Dream.get "/app" (fun _request ->
       Dream.html (In_channel.read_all "server/brokerage_ui.html"));
     Dream.get "/api/stocks/list" (fun _request ->
-      let output = Core_unix.open_process_in "python3 server/stock_data.py list 50" in
+      let output = Core_unix.open_process_in "python3 server/market_data_cache.py list 50" in
       let result = In_channel.input_all output in
       let _ = Core_unix.close_process_in output in
       Dream.json result);
     Dream.get "/api/stocks/search/:query" (fun request ->
       let query = Dream.param request "query" in
-      let cmd = Printf.sprintf "python3 server/stock_data.py search '%s'" query in
+      let cmd = Printf.sprintf "python3 server/market_data_cache.py search '%s'" query in
       let output = Core_unix.open_process_in cmd in
       let result = In_channel.input_all output in
       let _ = Core_unix.close_process_in output in
       Dream.json result);
     Dream.get "/api/stocks/quote/:symbol" (fun request ->
       let symbol = Dream.param request "symbol" in
-      let cmd = Printf.sprintf "python3 server/stock_data.py quote %s" symbol in
+      let cmd = Printf.sprintf "python3 server/market_data_cache.py quote %s" symbol in
       let output = Core_unix.open_process_in cmd in
       let result = In_channel.input_all output in
       let _ = Core_unix.close_process_in output in
@@ -1011,7 +1011,7 @@ let () =
     Dream.get "/api/stocks/historical/:symbol/:period" (fun request ->
       let symbol = Dream.param request "symbol" in
       let period = Dream.param request "period" in
-      let cmd = Printf.sprintf "python3 server/stock_data.py historical %s %s" symbol period in
+      let cmd = Printf.sprintf "python3 server/market_data_cache.py historical %s %s" symbol period in
       let output = Core_unix.open_process_in cmd in
       let result = In_channel.input_all output in
       let _ = Core_unix.close_process_in output in
