@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Allow external images
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'blocks.mvp-subha.me',
+        pathname: '/assets/**',
+      },
+    ],
+  },
   // Allow connection to local OCaml backend
   async rewrites() {
     return [
