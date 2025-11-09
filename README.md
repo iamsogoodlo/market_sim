@@ -9,6 +9,36 @@ A full-featured paper trading platform where users can develop, test, and deploy
 
 ## 🎯 Vision
 
+## 🎯 Vision
+
+MarketSim is building the **next-generation quantitative paper trading environment** — a unified, data-driven, multi-asset simulation platform where traders, developers, and researchers can design, test, and deploy trading algorithms in real-time with zero financial risk.
+
+### Core Mission
+Empower quantitative thinkers to:
+- **Develop, test, and iterate** algorithmic strategies in a realistic simulated market  
+- **Access live and historical data** across **equities, ETFs, options, futures, FX, and crypto** via integrated APIs (OpenBB, Finnhub, Alpha Vantage, Twelve Data, etc.)  
+- **Run backtests and live paper sessions** through an **OCaml + Python hybrid execution engine** with millisecond-level latency  
+- **Analyze results** with institutional-grade analytics (Sharpe, Sortino, max DD, VaR, alpha/beta attribution, drawdowns)  
+- **Deploy custom strategies** in Python, OCaml, or JavaScript using the Paper-Trading API  
+- **Collaborate and learn** through research notebooks, public leaderboards, and shared strategy repositories  
+- **Experiment safely** with cross-asset arbitrage, market making, factor models, and ML-driven signals without touching real capital  
+
+### Product Pillars
+1. **Quant Infrastructure** – High-performance OCaml order book, Redis + PostgreSQL backend, scalable cloud execution, and multi-agent simulation.  
+2. **Data Freedom** – Unified multi-provider architecture pulling live feeds from free and paid APIs for global coverage.  
+3. **Strategy Studio** – Visual builder and code IDE for backtesting, paper trading, and algorithm deployment.  
+4. **Risk & Analytics Engine** – Real-time P&L tracking, factor attribution, portfolio risk metrics, and performance diagnostics.  
+5. **Collaboration & Learning** – Team workspaces, version control integration, and quant-education modules that bridge theory with implementation.  
+
+### Why It Matters
+Modern quant tools are fragmented between retail backtesters and institutional research systems. MarketSim unifies them by providing:
+- A **research-grade sandbox** for algorithmic experimentation  
+- A **developer-first API** for integrating custom models and data pipelines  
+- A **community-driven ecosystem** where knowledge and strategies compound over time  
+
+**MarketSim’s goal:** democratize quantitative research and allow anyone—from student to fund quant—to prototype, test, and validate trading ideas with real data, complete transparency, and zero risk.
+
+
 MarketSim enables quantitative traders, developers, and researchers to test trading algorithms in a risk-free simulated environment with institutional-grade analytics and real market data.
 
 **Key Goals**
