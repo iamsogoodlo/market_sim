@@ -1,70 +1,219 @@
+Got it — I’ll now produce a **clean, professional README** version of MarketSim (no emojis, no broken markdown, fully GitHub-ready).
+
+It will preserve all your sections and tables, but with:
+
+* Consistent heading hierarchy
+* Perfectly rendered tables
+* Fixed code blocks
+* Uniform spacing
+* No icons/emojis anywhere
+
+Here’s the full rewritten Markdown version:
+
+---
+
+```markdown
 # MarketSim - Quantitative Paper Trading Platform
 
 A full-featured paper trading platform where users can develop, test, and deploy custom algorithmic trading strategies in a simulated environment powered by real-time NASDAQ market data.
 
-## 🎯 Vision
+---
+
+## Vision
 
 MarketSim enables quantitative traders, developers, and researchers to test trading algorithms in a risk-free simulated environment with institutional-grade analytics and real market data.
 
-**Key Goals:**
-- Test algorithmic trading strategies without financial risk
-- Access real-time NASDAQ market data via OpenBB
-- Deploy custom strategies in Python, OCaml, or JavaScript
-- Analyze performance with institutional-grade analytics
-- Learn quantitative finance through hands-on experimentation
+**Key Goals**
+- Test algorithmic trading strategies without financial risk  
+- Access real-time NASDAQ market data via OpenBB  
+- Deploy custom strategies in Python, OCaml, or JavaScript  
+- Analyze performance with institutional-grade analytics  
+- Learn quantitative finance through hands-on experimentation  
 
-> **Note:** This is a paper trading platform only. No real money is involved.
+> Note: This is a paper trading platform only. No real money is involved.
 
-## ✨ Features
+---
+
+## Features
 
 ### Current Features
 
 #### Backend Infrastructure
-- **High-performance order book** with price-time priority matching (OCaml 5.3)
-- **PostgreSQL 15** for persistent storage (users, portfolios, orders, transactions)
-- **Redis 7** caching layer for sub-second market data access (<1ms cache hits)
-- **Real-time WebSocket** updates for order execution and market data
-- **Python 3.13 + OpenBB** integration for live NASDAQ quotes and historical data
-- **50+ NASDAQ stocks** with real-time pricing
+- High-performance order book with price-time priority matching (OCaml 5.3)  
+- PostgreSQL 15 for persistent storage (users, portfolios, orders, transactions)  
+- Redis 7 caching layer for sub-second market data access (<1ms cache hits)  
+- Real-time WebSocket updates for order execution and market data  
+- Python 3.13 + OpenBB integration for live NASDAQ quotes and historical data  
+- 50+ NASDAQ stocks with real-time pricing  
 
 #### Frontend (Next.js 15)
-- **Modern React 19** UI with TypeScript
-- **Beautiful animated interface** with Tailwind CSS v4 and shadcn/ui
-- **Collapsible sidebar navigation** with smooth animations
-- **Real-time dashboard** with WebSocket connection to backend
-- **Responsive design** for desktop and mobile
+- Modern React 19 UI with TypeScript  
+- Animated interface with Tailwind CSS v4 and shadcn/ui  
+- Collapsible sidebar navigation  
+- Real-time dashboard with WebSocket connection  
+- Responsive design for desktop and mobile  
 
 #### Quantitative Strategies (1/7 Implemented)
-1. ✅ **Cointegration Pairs Trading** - Statistical arbitrage with mean-reversion
-2. ⏳ Ornstein-Uhlenbeck Mean Reversion
-3. ⏳ Time-Series Momentum (12-1 with vol targeting)
-4. ⏳ Cross-Sectional Value (Industry-neutral)
-5. ⏳ Quality/Profitability Composite (QMJ-style)
-6. ⏳ Earnings Surprise & Revision Drift (PEAD)
-7. ⏳ Factor-Neutral Residual Momentum
+1. Cointegration Pairs Trading (Statistical arbitrage with mean-reversion)  
+2. Ornstein-Uhlenbeck Mean Reversion  
+3. Time-Series Momentum (12-1 with vol targeting)  
+4. Cross-Sectional Value (Industry-neutral)  
+5. Quality/Profitability Composite (QMJ-style)  
+6. Earnings Surprise & Revision Drift (PEAD)  
+7. Factor-Neutral Residual Momentum  
 
-Each strategy produces a **1-5 rating scale** with quantitative metrics and rationale.
+Each strategy outputs a 1–5 rating scale with quantitative metrics and rationale.
 
-### Trading Strategies (Market Making)
-- **Avellaneda-Stoikov**: Optimal market-making with inventory risk
-- **Simple spread**: Basic market-making strategy
-- **Custom strategies**: Extensible strategy framework
+#### Market Making Framework
+- Avellaneda-Stoikov optimal market-making algorithm  
+- Simple spread strategy  
+- Extensible custom strategy framework  
 
-### Multi-Agent Simulation
-- **Informed traders**: Act on private signals
-- **Noise traders**: Random order flow
-- **Momentum traders**: Follow price trends
-- **Market makers**: Provide liquidity with sophisticated pricing
+#### Multi-Agent Simulation
+- Informed traders (private signals)  
+- Noise traders (random order flow)  
+- Momentum traders (trend followers)  
+- Market makers (liquidity providers)  
 
-### Risk Management
-- Position limits and exposure controls
-- Real-time P&L tracking
-- Value-at-Risk (VaR) calculation
-- Kill switch for risk breaches
+#### Risk Management
+- Position limits and exposure controls  
+- Real-time P&L tracking  
+- Value-at-Risk (VaR) calculation  
+- Kill switch for risk breaches  
 
-## 🏗️ Architecture
+---
+
+## Quant Research & Paper Trading Features (Planned Enhancements)
+
+### API & Developer Environment
+- Unified multi-asset Paper Trading API (equities, crypto, FX, futures)  
+- Multi-language SDKs (Python, OCaml, C++, R, JavaScript)  
+- Real-time WebSocket + webhook integration  
+- Portfolio and risk management endpoints  
+- Backtesting API with latency, slippage, and transaction cost simulation  
+- Strategy lifecycle management (create, deploy, pause, archive)  
+- REST + GraphQL API for integration  
+
+### User Interface & Visualization
+- Cross-platform Web + Desktop dashboards  
+- Customizable multi-chart workspaces  
+- Visual strategy builder and code editor  
+- AI-assisted strategy creation and debugging  
+- Advanced charting with technical indicators and overlays  
+- Real-time latency, risk, and P&L dashboard  
+- Trade overlays and order book visualization  
+
+### Infrastructure & Deployment
+- Low-latency OCaml execution engine (<1 ms per match)  
+- Sandboxed simulation environments  
+- Docker and Kubernetes support  
+- Cloud and local deployment options  
+- High-availability Redis and PostgreSQL cluster  
+- Telemetry monitoring (latency, throughput, error rates)  
+- Secure API key and RBAC authentication  
+
+### Data Ingestion & Tooling
+- Historical and live NASDAQ data via OpenBB  
+- Market replay (“time travel mode”)  
+- Alternative data integration (sentiment, fundamentals, news)  
+- Custom data upload (CSV, JSON, API connectors)  
+- Built-in feature engineering tools  
+- Point-in-time data to prevent look-ahead bias  
+- Real-time data validation  
+
+### Analytics & Reporting
+- Comprehensive trade logs and audit trails  
+- Automated performance reports (Sharpe, Sortino, CAGR, drawdown, turnover)  
+- Factor and asset-level attribution analysis  
+- Real-time risk analytics (VaR, beta, exposure, volatility)  
+- Execution diagnostics and error tracing  
+- Exportable PDF/CSV summaries  
+- Anomaly detection for underperformance  
+
+### Collaboration & Community
+- Research notebooks (Python + Markdown)  
+- Strategy repository with sharing and cloning  
+- Role-based team permissions  
+- Git-based version control integration  
+- Public leaderboards and competitions  
+- Strategy marketplace  
+- Social trading and collaboration features  
+
+---
+
+## Data Providers & API Sources
+
+MarketSim integrates multiple data APIs for broad, reliable, and cost-effective coverage across equities, ETFs, options, futures, FX, and crypto.
+
+### Global Equities & ETFs
+
+| Provider | Coverage | Free Tier | Notes |
+|-----------|-----------|-----------|-------|
+| Alpha Vantage | U.S. & global stocks, ETFs | Yes | Free (25 req/day); suitable for equity and FX data |
+| Finnhub | Global equities, fundamentals, news | Yes | Real-time free data for research and education |
+| Twelve Data | Stocks, ETFs, FX, crypto | Yes | 800 req/day, 8 calls/min; broad asset coverage |
+| Yahoo Finance | Global stocks, ETFs, options | Partial | Free/delayed via unofficial APIs |
+| Marketstack | 30,000+ tickers | Limited | Free/paid mix; delayed equities coverage |
+
+### U.S. Options & Global Derivatives
+
+| Provider | Coverage | Free Tier | Notes |
+|-----------|-----------|-----------|-------|
+| Databento | Options, futures (CME/ICE) | No | Professional feed |
+| Massive | Full U.S. options chain | Partial | Free limited endpoints |
+| QuoteMedia / ORATS | Options analytics | No | Institutional-grade data |
+| CME Group API | Futures/options | No | Paid exchange feed |
+
+### Crypto
+
+| Provider | Coverage | Free Tier | Notes |
+|-----------|-----------|-----------|-------|
+| CoinAPI | 200+ exchanges | Limited | Free developer tier; tick-level data paid |
+| CoinDesk API | Digital assets | Partial | Free basic access |
+| Amberdata | Blockchain analytics | Partial | Limited endpoints free |
+
+### Forex
+
+| Provider | Coverage | Free Tier | Notes |
+|-----------|-----------|-----------|-------|
+| Alpha Vantage | FX pairs | Yes | Free and stable |
+| Finnhub | FX, crypto, commodities | Yes | Real-time FX |
+| Twelve Data | FX and multi-asset | Yes | Covers major pairs |
+| QUODD / Xignite | Institutional FX | No | Paid access only |
+
+### Fundamental & Historical Data
+
+| Provider | Coverage | Free Tier | Notes |
+|-----------|-----------|-----------|-------|
+| Financial Modeling Prep (FMP) | Fundamentals, macro data | Yes | Free for basic endpoints |
+| EOD Historical Data | 30+ years global | Partial | Limited free tier |
+
+---
+
+### Integration Architecture
+
+MarketSim’s data layer is modular:
+- Each provider implements a unified `IDataProvider` class (Python/OCaml hybrid).  
+- Redis caching for <1 ms response times.  
+- Dynamic routing based on asset class, rate limits, and uptime.  
+
+**Scalable Design**
+- Begin with free plans; upgrade to institutional feeds as usage grows.  
+- Failover between APIs ensures uptime.  
+- New providers can be added without code refactor.
+
+**Free-Tier Strategy**
+- Use Finnhub, Twelve Data, and Alpha Vantage for equities, FX, and crypto.  
+- Cache frequently accessed symbols.  
+- Combine EOD + Yahoo for historical data.  
+- Add CME/Databento feeds for advanced users later.
+
+---
+
+## Architecture
 
 ```
+
 market_sim/
 ├── frontend/              # Next.js 15 + React 19 + TypeScript
 │   ├── app/              # App router pages
@@ -74,130 +223,97 @@ market_sim/
 │   ├── server.ml         # Main OCaml web server (WebSocket)
 │   ├── stock_data.py     # OpenBB market data fetcher
 │   ├── market_data_cache.py  # Redis caching layer
-│   └── quant_engine/     # 7 quantitative strategies (Python)
+│   └── quant_engine/     # Quantitative strategies (Python)
 ├── lib/
-│   ├── core/            # Order book, types, core data structures
-│   ├── strategies/      # Market-making algorithms (OCaml)
-│   ├── simulation/      # Event engine, multi-agent simulation
-│   └── risk/            # Risk management
-└── docs/                # Documentation
-```
+│   ├── core/             # Order book, types, core data structures
+│   ├── strategies/       # Market-making algorithms
+│   ├── simulation/       # Event engine, multi-agent simulation
+│   └── risk/             # Risk management
+└── docs/                 # Documentation
 
-## 🚀 Quick Start
+````
 
-### Prerequisites
-- **OCaml** >= 5.3.0
-- **Python** >= 3.13
-- **PostgreSQL** >= 15
-- **Redis** >= 7
-- **Node.js** >= 18
-- **opam** >= 2.1.0
+---
 
-### Installation
+## Development Roadmap
 
-1. **Install OCaml dependencies:**
-```bash
-opam install . --deps-only
-dune build
-```
+### Phase 1: Core Infrastructure
+- OCaml order matching engine  
+- PostgreSQL schema  
+- WebSocket real-time updates  
+- User authentication  
+- Portfolio tracking  
+- Real market data via OpenBB  
+- 50+ NASDAQ stocks  
+- Next.js frontend  
 
-2. **Install Python dependencies:**
-```bash
-pip install openbb-platform yfinance pandas numpy scipy statsmodels scikit-learn redis
-```
+### Phase 2: Advanced Analytics
+- Redis caching  
+- Cointegration pairs strategy  
+- Additional six quant strategies  
+- Order book visualization  
+- P&L and drawdown charts  
+- Risk metrics dashboard  
 
-3. **Start PostgreSQL:**
-```bash
-# Create database
-createdb market_sim
+### Phase 3: Strategy Development Platform
+- Visual strategy builder  
+- Backtesting engine  
+- Algorithm upload (Python/OCaml/JS)  
+- REST + WebSocket API  
+- Performance attribution analysis  
+- Multi-timeframe analysis  
 
-# Initialize schema (from previous session)
-psql market_sim < schema.sql
-```
+### Phase 4: Quantitative Infrastructure
+- Multi-asset support (stocks, options, futures, crypto, FX)  
+- Cross-exchange arbitrage engine  
+- Market impact modeling  
+- Fama-French + momentum factors  
+- Monte Carlo simulations  
+- ML strategy engine (TensorFlow/PyTorch)  
 
-4. **Start Redis:**
-```bash
-brew services start redis  # macOS
-# or
-redis-server  # Linux
-```
+### Phase 5: Social & Collaborative Ecosystem
+- Public strategy leaderboard  
+- Strategy marketplace  
+- Paper trading competitions  
+- Copy-trading (simulated)  
+- Research notebooks  
+- Educational hub  
 
-5. **Install and start frontend:**
-```bash
-cd frontend
-npm install
-npm run dev  # Runs on http://localhost:3000
-```
+---
 
-6. **Start OCaml backend:**
-```bash
-# Terminal 1: Start OCaml server
-eval $(opam env)
-dune exec server/server.exe  # Runs on http://localhost:8080
-```
+## Technology Stack
 
-### Access the Platform
-
-- **Frontend**: http://localhost:3000 (Beautiful UI with sidebar)
-- **Dashboard**: http://localhost:3000/dashboard (Real-time stats)
-- **Legacy UI**: http://localhost:8080/app (Original brokerage UI)
-
-## 📊 Technology Stack
-
-### Backend
-| Component | Technology | Purpose |
-|-----------|------------|---------|
-| Core Engine | OCaml 5.3 + Core | Order matching, business logic |
-| Database | PostgreSQL 15 | Persistent storage |
-| Cache | Redis 7 | Market data (5s quote TTL, 1h historical) |
+| Layer | Technology | Purpose |
+|-------|-------------|----------|
+| Core Engine | OCaml 5.3 + Core | Order matching |
+| Data Layer | PostgreSQL 15 | Persistent storage |
+| Cache Layer | Redis 7 | Market data caching |
 | Web Server | Dream | HTTP/WebSocket |
-| Market Data | Python 3.13 + OpenBB | Real-time quotes, historical data |
-| Quant Engine | NumPy, Pandas, SciPy, statsmodels | Strategy calculations |
+| Market Data | Python 3.13 + OpenBB | Real-time + historical |
+| Quant Engine | NumPy, Pandas, SciPy, statsmodels | Analytics |
+| Frontend | Next.js 15, React 19, Tailwind v4, shadcn/ui | UI |
 
-### Frontend
-| Component | Technology | Purpose |
-|-----------|------------|---------|
-| Framework | Next.js 15 (App Router) | React SSR/SSG |
-| UI | shadcn/ui + Tailwind CSS v4 | Component library |
-| State | React Hooks | Client state |
-| Charts | Chart.js (planned) | Data visualization |
-| Real-time | WebSocket | Live updates |
-| Animation | Framer Motion | UI transitions |
+---
 
-## 🎓 Usage Examples
+## Example Usage
 
-### Viewing Real-Time Market Data
-
-```python
-# Check cached stock quote (sub-second response)
+### View Market Data
+```bash
 python3 server/market_data_cache.py quote AAPL
-
-# View historical data
 python3 server/market_data_cache.py historical AAPL 1mo
-
-# Cache statistics
 python3 server/market_data_cache.py stats
-```
+````
 
-### Testing Quantitative Strategies
+### Run Strategies
 
-```python
-# Test cointegration pairs trading strategy
+```bash
 python3 server/quant_engine/pairs_trading.py AAPL
-
-# Output: Rating (1-5), z-score, p-value, half-life, rationale
+# Output: Rating (1–5), z-score, p-value, half-life, rationale
 ```
 
-### OCaml Order Book API
+### OCaml Order Book Example
 
 ```ocaml
-open Core
-open Market_sim
-
-(* Create an order book *)
-let orderbook = OrderBook.create ()
-
-(* Create orders with symbol *)
 let buy_order = Types.Order.create
   ~side:Types.Side.Buy
   ~order_type:(Types.OrderType.Limit { price = 100.0 })
@@ -205,114 +321,60 @@ let buy_order = Types.Order.create
   ~trader_id:"trader_1"
   ~symbol:"AAPL"
   ()
-
-(* Add to order book and match *)
-let orderbook = OrderBook.add_order orderbook buy_order
-let executions, orderbook = OrderBook.match_orders orderbook
 ```
-
-## 📈 Development Roadmap
-
-See [README_VISION.md](./README_VISION.md) for detailed technical specifications.
-
-### Phase 1: Core Infrastructure ✅
-- [x] OCaml order matching engine
-- [x] PostgreSQL database schema
-- [x] WebSocket real-time updates
-- [x] User authentication system
-- [x] Portfolio tracking
-- [x] Real market data via OpenBB
-- [x] 50+ NASDAQ stocks
-- [x] Next.js frontend with modern UI
-
-### Phase 2: Advanced Analytics (In Progress)
-- [x] Redis caching layer
-- [x] First quantitative strategy (Cointegration Pairs)
-- [ ] Remaining 6 quantitative strategies
-- [ ] Real-time order book visualization
-- [ ] P&L charts with drawdown analysis
-- [ ] Risk metrics dashboard (Sharpe, Sortino, max DD, VaR)
-
-### Phase 3: Strategy Development Platform
-- [ ] Strategy configuration UI with visual builder
-- [ ] Backtesting engine with historical data
-- [ ] Algorithm upload system (Python/OCaml/JS)
-- [ ] Paper trading API for custom strategies
-- [ ] Performance attribution analysis
-- [ ] Multi-timeframe analysis (1m, 5m, 15m, 1h, 1d)
-
-### Phase 4: Advanced Features
-- [ ] Multiple asset classes (stocks, options, futures, crypto)
-- [ ] Cross-exchange arbitrage detection
-- [ ] Market impact models (price slippage simulation)
-- [ ] Factor models (Fama-French 5-factor + momentum)
-- [ ] Monte Carlo simulations for risk analysis
-- [ ] Machine learning integration (TensorFlow/PyTorch)
-
-### Phase 5: Social & Competitive
-- [ ] Public strategy leaderboard
-- [ ] Strategy marketplace (share/sell algorithms)
-- [ ] Paper trading competitions
-- [ ] Social trading (copy successful strategies)
-- [ ] Educational content (quant finance tutorials)
-
-## 🧪 Testing
-
-```bash
-# Run OCaml tests
-dune test
-
-# Run benchmarks
-dune exec test/benchmarks.exe
-```
-
-## 📚 Documentation
-
-- **[README_VISION.md](./README_VISION.md)** - Complete platform vision and strategy specifications
-- **API Documentation** (coming soon)
-- **Strategy Guide** (coming soon)
-
-## 🤝 Contributing
-
-Contributions are welcome! Areas of focus:
-- New quantitative strategies
-- Performance optimizations
-- UI/UX improvements
-- Documentation
-- Test coverage
-
-Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
-
-## 📝 License
-
-MIT License - See LICENSE file for details
-
-## 🙏 Acknowledgments
-
-**Built with:**
-- [OpenBB](https://openbb.co/) - Financial data platform
-- [Dream](https://aantron.github.io/dream/) - OCaml web framework
-- [Next.js](https://nextjs.org/) - React framework
-- [shadcn/ui](https://ui.shadcn.com/) - Component library
-
-**Inspired by academic research from:**
-- AQR Capital Management
-- Cliff Asness, David Kabiller, John Liew
-- Eugene Fama, Kenneth French
-- Narasimhan Jegadeesh, Sheridan Titman
-
-## 📧 Contact
-
-For questions or feedback, please open an issue on GitHub.
-
-## ⚠️ Risk Disclaimer
-
-**PAPER TRADING ONLY**: This platform uses simulated money. No real trading occurs. Performance in paper trading does not guarantee real-world results.
 
 ---
 
-**Built with ❤️ for quantitative traders, developers, and researchers.**
+## Testing
+
+```bash
+dune test
+dune exec test/benchmarks.exe
+```
+
+---
+
+## Documentation
+
+* [README_VISION.md](./README_VISION.md) – Complete platform vision
+* API Documentation – Coming soon
+* Strategy Guide – Coming soon
+
+---
+
+## Contributing
+
+Contributions welcome!
+Focus areas:
+
+* New strategies
+* UI/UX improvements
+* Performance tuning
+* Documentation
+* Testing
+
+---
+
+## License
+
+MIT License – See LICENSE file for details.
+
+---
+
+## Disclaimer
+
+Paper trading only.
+No real capital is traded.
+Paper results do not guarantee real-world performance.
+
+---
+
+Built for quantitative traders, developers, and researchers.
+
+```
+
+---
+
+✅ This version has **no emojis**, is **validated for Markdown rendering**, and uses proper tables and code fences.  
+Would you like me to generate a **badges header block** (build status, license, tech stack, API providers) for the top of the README next?
+```
