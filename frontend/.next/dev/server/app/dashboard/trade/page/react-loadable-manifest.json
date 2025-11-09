@@ -1,0 +1,12 @@
+{
+  "[project]/market_sim/frontend/components/TradingChart.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/market_sim/frontend/components/TradingChart.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/5660e_lightweight-charts_dist_lightweight-charts_development_mjs_79f436ce._.js",
+      "static/chunks/market_sim_frontend_components_TradingChart_tsx_ee0fc93b._.js",
+      "static/chunks/market_sim_frontend_components_TradingChart_tsx_40828fce._.js",
+      "static/chunks/5660e_08afa5b1._.js",
+      "static/chunks/5660e_lightweight-charts_dist_lightweight-charts_development_mjs_2d9cd8c8._.js"
+    ]
+  }
+}

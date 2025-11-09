@@ -89,14 +89,9 @@ export const DesktopSidebar = ({
   return (
     <motion.div
       className={cn(
-        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] flex-shrink-0",
+        "h-screen px-0 py-2 hidden md:flex md:flex-col bg-[hsl(var(--tv-surface))] w-[48px] flex-shrink-0 fixed left-0 top-0 z-40 overflow-y-auto border-r border-[hsl(var(--tv-border))]",
         className
       )}
-      animate={{
-        width: animate ? (open ? "300px" : "60px") : "300px",
-      }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
       {...props}
     >
       {children}
@@ -114,13 +109,13 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-12 px-4 py-2 flex flex-row md:hidden items-center justify-between bg-[hsl(var(--tv-surface))] w-full fixed top-0 left-0 right-0 z-50 border-b border-[hsl(var(--tv-border))]"
         )}
         {...props}
       >
         <div className="flex justify-end z-20 w-full">
           <Menu
-            className="text-neutral-800 dark:text-neutral-200 cursor-pointer"
+            className="text-[hsl(var(--tv-text-primary))] cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -135,12 +130,12 @@ export const MobileSidebar = ({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-[hsl(var(--tv-background))] p-10 z-[100] flex flex-col justify-between overflow-y-auto",
                 className
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200 cursor-pointer"
+                className="absolute right-10 top-10 z-50 text-[hsl(var(--tv-text-primary))] cursor-pointer"
                 onClick={() => setOpen(!open)}
               >
                 <X />
@@ -164,25 +159,30 @@ export const SidebarLink = ({
   props?: LinkProps;
 }) => {
   const { open, animate } = useSidebar();
+  const [isActive, setIsActive] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsActive(window.location.pathname === link.href);
+  }, [link.href]);
+
   return (
     <Link
       href={link.href}
       className={cn(
-        "flex items-center justify-start gap-2 group/sidebar py-2",
+        "flex items-center justify-center w-full h-12 relative group/sidebar transition-colors",
+        isActive
+          ? "bg-[hsl(var(--tv-surface-elevated))] border-l-2 border-[hsl(var(--tv-blue))]"
+          : "hover:bg-[hsl(var(--tv-surface-elevated))]",
         className
       )}
       {...props}
     >
-      {link.icon}
-      <motion.span
-        animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
-          opacity: animate ? (open ? 1 : 0) : 1,
-        }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
-      >
-        {link.label}
-      </motion.span>
+      <div className={cn(
+        "transition-colors",
+        isActive ? "text-[hsl(var(--tv-blue))]" : "text-[hsl(var(--tv-text-secondary))] group-hover/sidebar:text-[hsl(var(--tv-text-primary))]"
+      )}>
+        {link.icon}
+      </div>
     </Link>
   );
 };

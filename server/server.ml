@@ -1016,5 +1016,119 @@ let () =
       let result = In_channel.input_all output in
       let _ = Core_unix.close_process_in output in
       Dream.json result);
+    Dream.get "/api/strategies/pairs/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/pairs_trading.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/ou_mean_reversion/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/ou_mean_reversion.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/ts_momentum/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/ts_momentum.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/value/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/value_strategy.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/quality/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/quality_strategy.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/earnings_drift/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/earnings_drift.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/residual_momentum/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/residual_momentum.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/residual_momentum_enhanced/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/residual_momentum_enhanced.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.get "/api/strategies/multi_factor/:symbol" (fun request ->
+      let symbol = Dream.param request "symbol" in
+      let cmd = Printf.sprintf "python3 server/quant_engine/multi_factor_scorer.py %s" symbol in
+      let output = Core_unix.open_process_in cmd in
+      let result = In_channel.input_all output in
+      let _ = Core_unix.close_process_in output in
+      Dream.json result);
+    Dream.post "/api/strategies/rank_stocks" (fun request ->
+      let%lwt body = Dream.body request in
+      try
+        let json = Yojson.Basic.from_string body in
+        let open Yojson.Basic.Util in
+        let symbols = json |> member "symbols" |> to_list |> List.map ~f:to_string in
+        let symbols_str = String.concat ~sep:" " symbols in
+        let cmd = Printf.sprintf "python3 server/quant_engine/multi_factor_scorer.py %s" symbols_str in
+        let output = Core_unix.open_process_in cmd in
+        let result = In_channel.input_all output in
+        let _ = Core_unix.close_process_in output in
+        Dream.json result
+      with
+      | e ->
+          Dream.log "Error ranking stocks: %s" (Exn.to_string e);
+          let error_msg = Printf.sprintf {|{"error":"Error: %s"}|} (Exn.to_string e) in
+          Dream.json ~status:`Internal_Server_Error error_msg
+    );
+    Dream.get "/api/portfolio/holdings" (fun _request ->
+      (* For now, use user_id = 1 as default user *)
+      let%lwt holdings = Db.get_holdings 1 in
+      Dream.json (Yojson.Basic.to_string holdings));
+    Dream.get "/api/portfolio/balance" (fun _request ->
+      let%lwt balance = Db.get_cash_balance 1 in
+      let json = Printf.sprintf {|{"cashBalance":%.2f}|} balance in
+      Dream.json json);
+    Dream.post "/api/portfolio/trade" (fun request ->
+      let%lwt body = Dream.body request in
+      try
+        let json = Yojson.Basic.from_string body in
+        let open Yojson.Basic.Util in
+        let symbol = json |> member "symbol" |> to_string in
+        let action = json |> member "action" |> to_string in
+        let quantity = json |> member "quantity" |> to_int in
+        let price = json |> member "price" |> to_float in
+
+        (* Execute trade for user_id = 1 as default *)
+        let%lwt result = Db.execute_trade 1 symbol action quantity price in
+        match result with
+        | Ok msg ->
+            let response = Printf.sprintf {|{"success":true,"message":"%s"}|} msg in
+            Dream.json response
+        | Error err_msg ->
+            let response = Printf.sprintf {|{"success":false,"message":"%s"}|} err_msg in
+            Dream.json ~status:`Bad_Request response
+      with
+      | e ->
+          Dream.log "Error processing trade: %s" (Exn.to_string e);
+          let error_msg = Printf.sprintf {|{"success":false,"message":"Error: %s"}|} (Exn.to_string e) in
+          Dream.json ~status:`Internal_Server_Error error_msg
+    );
     Dream.get "/ws" websocket_handler;
   ]

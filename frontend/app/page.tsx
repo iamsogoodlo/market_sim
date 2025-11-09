@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-nav";
-import { LayoutDashboard, TrendingUp, LineChart, Code, BarChart3, BookOpen, Settings } from "lucide-react";
+import { LayoutDashboard, TrendingUp, LineChart, Code, BarChart3, BookOpen, Settings, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -22,6 +22,13 @@ export default function Home() {
       href: "/dashboard/portfolio",
       icon: (
         <TrendingUp className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Trade",
+      href: "/dashboard/trade",
+      icon: (
+        <ShoppingCart className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -64,7 +71,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-900 w-full min-h-screen overflow-hidden">
+    <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-900 w-full min-h-screen">
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -90,7 +97,8 @@ export default function Home() {
           </div>
         </SidebarBody>
       </Sidebar>
-      <div className="flex flex-1 overflow-y-auto">
+      {/* Main content with proper margin to account for fixed sidebar */}
+      <div className="flex flex-1 w-full md:ml-[60px] pt-16 md:pt-0">
         <Globe3D />
       </div>
     </div>

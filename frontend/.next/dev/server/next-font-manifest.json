@@ -1,9 +1,27 @@
 {
   "app": {
-    "[project]/market_sim/frontend/app/_not-found/page": [
+    "[project]/market_sim/frontend/app/dashboard/algorithms/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/backtest/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/docs/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
     "[project]/market_sim/frontend/app/dashboard/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/portfolio/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/settings/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/strategies/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/market_sim/frontend/app/dashboard/trade/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
     "[project]/market_sim/frontend/app/page": [

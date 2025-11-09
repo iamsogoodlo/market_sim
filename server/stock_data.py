@@ -106,6 +106,45 @@ def get_historical_data(symbol, period="1mo"):
 
     return []
 
+def get_stock_info(symbol):
+    """
+    Get fundamental information about a stock
+    Returns: Dict with fundamental metrics like P/E, P/B, market cap, etc.
+    """
+    try:
+        # Try to use yfinance directly for info
+        import yfinance as yf
+        ticker = yf.Ticker(symbol)
+        info = ticker.info
+
+        return {
+            'symbol': symbol,
+            'marketCap': info.get('marketCap'),
+            'enterpriseValue': info.get('enterpriseValue'),
+            'trailingPE': info.get('trailingPE'),
+            'forwardPE': info.get('forwardPE'),
+            'priceToBook': info.get('priceToBook'),
+            'priceToSalesTrailing12Months': info.get('priceToSalesTrailing12Months'),
+            'profitMargins': info.get('profitMargins'),
+            'operatingMargins': info.get('operatingMargins'),
+            'returnOnEquity': info.get('returnOnEquity'),
+            'returnOnAssets': info.get('returnOnAssets'),
+            'debtToEquity': info.get('debtToEquity'),
+            'currentRatio': info.get('currentRatio'),
+            'quickRatio': info.get('quickRatio'),
+            'beta': info.get('beta'),
+            'dividendYield': info.get('dividendYield'),
+            'payoutRatio': info.get('payoutRatio'),
+            'enterpriseToEbitda': info.get('enterpriseToEbitda'),
+            'earningsGrowth': info.get('earningsGrowth'),
+            'revenueGrowth': info.get('revenueGrowth'),
+            'grossMargins': info.get('grossMargins'),
+            'ebitdaMargins': info.get('ebitdaMargins'),
+        }
+    except Exception as e:
+        print(f"Error fetching info for {symbol}: {e}", file=sys.stderr)
+        return None
+
 def search_stocks(query):
     """
     Search for stocks by symbol or name

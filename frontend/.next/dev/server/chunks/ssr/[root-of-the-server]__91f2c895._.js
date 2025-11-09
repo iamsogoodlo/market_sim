@@ -114,7 +114,7 @@ const SidebarBody = (props)=>{
 const DesktopSidebar = ({ className, children, ...props })=>{
     const { open, setOpen, animate } = useSidebar();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
-        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] flex-shrink-0", className),
+        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("h-screen px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] flex-shrink-0 fixed left-0 top-0 z-40 overflow-y-auto", className),
         animate: {
             width: animate ? open ? "300px" : "60px" : "300px"
         },
@@ -132,7 +132,7 @@ const MobileSidebar = ({ className, children, ...props })=>{
     const { open, setOpen } = useSidebar();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"),
+            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("h-16 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full fixed top-0 left-0 right-0 z-50"),
             ...props,
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -168,7 +168,7 @@ const MobileSidebar = ({ className, children, ...props })=>{
                             duration: 0.3,
                             ease: "easeInOut"
                         },
-                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between", className),
+                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between overflow-y-auto", className),
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200 cursor-pointer",
@@ -480,6 +480,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$no
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$column$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__BarChart3$3e$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/lucide-react/dist/esm/icons/chart-column.js [app-ssr] (ecmascript) <export default as BarChart3>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$book$2d$open$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__BookOpen$3e$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/lucide-react/dist/esm/icons/book-open.js [app-ssr] (ecmascript) <export default as BookOpen>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$settings$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Settings$3e$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/lucide-react/dist/esm/icons/settings.js [app-ssr] (ecmascript) <export default as Settings>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$cart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ShoppingCart$3e$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/lucide-react/dist/esm/icons/shopping-cart.js [app-ssr] (ecmascript) <export default as ShoppingCart>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/market_sim/frontend/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$components$2f$blocks$2f$hero$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/market_sim/frontend/components/blocks/hero.tsx [app-ssr] (ecmascript)");
@@ -516,13 +517,24 @@ function Home() {
             }, this)
         },
         {
+            label: "Trade",
+            href: "/dashboard/trade",
+            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$cart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ShoppingCart$3e$__["ShoppingCart"], {
+                className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
+            }, void 0, false, {
+                fileName: "[project]/market_sim/frontend/app/page.tsx",
+                lineNumber: 31,
+                columnNumber: 9
+            }, this)
+        },
+        {
             label: "Strategies",
             href: "/dashboard/strategies",
             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$line$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__LineChart$3e$__["LineChart"], {
                 className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 31,
+                lineNumber: 38,
                 columnNumber: 9
             }, this)
         },
@@ -533,7 +545,7 @@ function Home() {
                 className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 38,
+                lineNumber: 45,
                 columnNumber: 9
             }, this)
         },
@@ -544,7 +556,7 @@ function Home() {
                 className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 45,
+                lineNumber: 52,
                 columnNumber: 9
             }, this)
         },
@@ -555,7 +567,7 @@ function Home() {
                 className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 52,
+                lineNumber: 59,
                 columnNumber: 9
             }, this)
         },
@@ -566,14 +578,14 @@ function Home() {
                 className: "text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 59,
+                lineNumber: 66,
                 columnNumber: 9
             }, this)
         }
     ];
     const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-900 w-full min-h-screen overflow-hidden",
+        className: "flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-900 w-full min-h-screen",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$components$2f$ui$2f$sidebar$2d$nav$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Sidebar"], {
                 open: open,
@@ -586,11 +598,11 @@ function Home() {
                             children: [
                                 open ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Logo, {}, void 0, false, {
                                     fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                    lineNumber: 71,
+                                    lineNumber: 78,
                                     columnNumber: 21
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(LogoIcon, {}, void 0, false, {
                                     fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                    lineNumber: 71,
+                                    lineNumber: 78,
                                     columnNumber: 32
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -599,18 +611,18 @@ function Home() {
                                             link: link
                                         }, idx, false, {
                                             fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                            lineNumber: 74,
+                                            lineNumber: 81,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                    lineNumber: 72,
+                                    lineNumber: 79,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/market_sim/frontend/app/page.tsx",
-                            lineNumber: 70,
+                            lineNumber: 77,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -623,47 +635,47 @@ function Home() {
                                         children: "MS"
                                     }, void 0, false, {
                                         fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                        lineNumber: 84,
+                                        lineNumber: 91,
                                         columnNumber: 19
                                     }, void 0)
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                                lineNumber: 79,
+                                lineNumber: 86,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/market_sim/frontend/app/page.tsx",
-                            lineNumber: 78,
+                            lineNumber: 85,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/market_sim/frontend/app/page.tsx",
-                    lineNumber: 69,
+                    lineNumber: 76,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 68,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex flex-1 overflow-y-auto",
+                className: "flex flex-1 w-full md:ml-[60px] pt-16 md:pt-0",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$components$2f$blocks$2f$hero$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/market_sim/frontend/app/page.tsx",
-                    lineNumber: 94,
+                    lineNumber: 102,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 93,
+                lineNumber: 101,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/market_sim/frontend/app/page.tsx",
-        lineNumber: 67,
+        lineNumber: 74,
         columnNumber: 5
     }, this);
 }
@@ -676,7 +688,7 @@ const Logo = ()=>{
                 className: "h-5 w-6 bg-gradient-to-br from-purple-600 to-blue-600 rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 106,
+                lineNumber: 114,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$market_sim$2f$frontend$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].span, {
@@ -690,13 +702,13 @@ const Logo = ()=>{
                 children: "MarketSim"
             }, void 0, false, {
                 fileName: "[project]/market_sim/frontend/app/page.tsx",
-                lineNumber: 107,
+                lineNumber: 115,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/market_sim/frontend/app/page.tsx",
-        lineNumber: 102,
+        lineNumber: 110,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -708,12 +720,12 @@ const LogoIcon = ()=>{
             className: "h-5 w-6 bg-gradient-to-br from-purple-600 to-blue-600 rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"
         }, void 0, false, {
             fileName: "[project]/market_sim/frontend/app/page.tsx",
-            lineNumber: 124,
+            lineNumber: 132,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/market_sim/frontend/app/page.tsx",
-        lineNumber: 120,
+        lineNumber: 128,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

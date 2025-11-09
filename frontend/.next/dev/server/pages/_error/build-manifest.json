@@ -1,0 +1,23 @@
+{
+  "devFiles": [],
+  "ampDevFiles": [],
+  "polyfillFiles": [],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [],
+  "pages": {
+    "/_error": [
+      "static/chunks/5660e_next_dist_compiled_0b1f3e32._.js",
+      "static/chunks/5660e_next_dist_shared_lib_5b692fdf._.js",
+      "static/chunks/5660e_next_dist_client_d36a0e02._.js",
+      "static/chunks/5660e_next_dist_2850e49b._.js",
+      "static/chunks/5660e_next_error_3b441fbc.js",
+      "static/chunks/[next]_entry_page-loader_ts_3166c27f._.js",
+      "static/chunks/5660e_react-dom_c5aedbdf._.js",
+      "static/chunks/5660e_494acbdc._.js",
+      "static/chunks/[root-of-the-server]__e98f0f86._.js",
+      "static/chunks/market_sim_frontend_pages__error_2da965e7._.js",
+      "static/chunks/turbopack-market_sim_frontend_pages__error_272a1498._.js"
+    ]
+  },
+  "ampFirstPages": []
+}

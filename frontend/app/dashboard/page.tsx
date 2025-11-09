@@ -21,57 +21,103 @@ export default function DashboardPage() {
 
   const [connected, setConnected] = useState(false);
 
+  // Fetch portfolio data on mount
   useEffect(() => {
-    // Connect to WebSocket for real-time updates
-    const ws = new WebSocket("ws://localhost:8080/ws");
-
-    ws.onopen = () => {
-      console.log("Connected to market simulator");
-      setConnected(true);
-    };
-
-    ws.onmessage = (event) => {
+    const fetchPortfolioData = async () => {
       try {
-        const data = JSON.parse(event.data);
-        console.log("Received:", data);
-        // Handle real-time updates here
-      } catch (e) {
-        console.error("Error parsing message:", e);
+        const [balanceRes, holdingsRes] = await Promise.all([
+          fetch("/api/portfolio/balance"),
+          fetch("/api/portfolio/holdings"),
+        ]);
+
+        if (balanceRes.ok && holdingsRes.ok) {
+          const balanceData = await balanceRes.json();
+          const holdingsData = await holdingsRes.json();
+
+          const cashBalance = balanceData.cashBalance || 100000;
+
+          // Calculate holdings value
+          const holdingsValue = holdingsData.reduce((sum: number, holding: any) => {
+            return sum + (holding.currentPrice || 0) * (holding.quantity || 0);
+          }, 0);
+
+          const totalValue = cashBalance + holdingsValue;
+
+          setStats({
+            totalValue,
+            cashBalance,
+            todayPnL: 0, // TODO: Calculate from daily changes
+            totalPnL: holdingsValue - holdingsData.reduce((sum: number, h: any) => sum + (h.costBasis || 0) * (h.quantity || 0), 0),
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching portfolio data:", error);
       }
     };
 
-    ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-      setConnected(false);
-    };
+    fetchPortfolioData();
+  }, []);
 
-    ws.onclose = () => {
-      console.log("Disconnected from market simulator");
+  // Connect to WebSocket for real-time updates (optional feature)
+  useEffect(() => {
+    let ws: WebSocket | null = null;
+
+    try {
+      ws = new WebSocket("ws://localhost:8080/ws");
+
+      ws.onopen = () => {
+        console.log("✓ Connected to market simulator");
+        setConnected(true);
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log("Received market update:", data);
+          // Handle real-time updates here
+        } catch (e) {
+          console.error("Error parsing message:", e);
+        }
+      };
+
+      ws.onerror = () => {
+        // Silently handle WebSocket errors - this is optional functionality
+        setConnected(false);
+      };
+
+      ws.onclose = () => {
+        console.log("Market simulator connection closed");
+        setConnected(false);
+      };
+    } catch (error) {
+      console.log("Market simulator real-time updates unavailable");
       setConnected(false);
-    };
+    }
 
     return () => {
-      ws.close();
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
     };
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight text-[hsl(var(--tv-text-primary))]">Dashboard</h1>
+          <p className="text-[hsl(var(--tv-text-secondary))]">
             Welcome to your quantitative trading platform
           </p>
         </div>
         <div className="flex items-center gap-2">
           <div
             className={`h-2 w-2 rounded-full ${
-              connected ? "bg-green-500" : "bg-red-500"
+              connected ? "bg-[hsl(var(--tv-green))]" : "bg-[hsl(var(--tv-text-secondary))]"
             }`}
           />
-          <span className="text-sm text-muted-foreground">
-            {connected ? "Connected" : "Disconnected"}
+          <span className="text-xs text-[hsl(var(--tv-text-secondary))]">
+            {connected ? "Live" : "Offline"}
           </span>
         </div>
       </div>
@@ -112,15 +158,15 @@ export default function DashboardPage() {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Today's P&L</CardTitle>
             {stats.todayPnL >= 0 ? (
-              <TrendingUp className="h-4 w-4 text-green-500" />
+              <TrendingUp className="h-4 w-4 text-[hsl(var(--tv-green))]" />
             ) : (
-              <TrendingDown className="h-4 w-4 text-red-500" />
+              <TrendingDown className="h-4 w-4 text-[hsl(var(--tv-red))]" />
             )}
           </CardHeader>
           <CardContent>
             <div
               className={`text-2xl font-bold ${
-                stats.todayPnL >= 0 ? "text-green-500" : "text-red-500"
+                stats.todayPnL >= 0 ? "text-[hsl(var(--tv-green))]" : "text-[hsl(var(--tv-red))]"
               }`}
             >
               ${stats.todayPnL >= 0 ? "+" : ""}
@@ -136,15 +182,15 @@ export default function DashboardPage() {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total P&L</CardTitle>
             {stats.totalPnL >= 0 ? (
-              <TrendingUp className="h-4 w-4 text-green-500" />
+              <TrendingUp className="h-4 w-4 text-[hsl(var(--tv-green))]" />
             ) : (
-              <TrendingDown className="h-4 w-4 text-red-500" />
+              <TrendingDown className="h-4 w-4 text-[hsl(var(--tv-red))]" />
             )}
           </CardHeader>
           <CardContent>
             <div
               className={`text-2xl font-bold ${
-                stats.totalPnL >= 0 ? "text-green-500" : "text-red-500"
+                stats.totalPnL >= 0 ? "text-[hsl(var(--tv-green))]" : "text-[hsl(var(--tv-red))]"
               }`}
             >
               ${stats.totalPnL >= 0 ? "+" : ""}

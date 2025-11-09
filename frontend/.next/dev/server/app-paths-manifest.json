@@ -1,5 +1,11 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
+  "/dashboard/algorithms/page": "app/dashboard/algorithms/page.js",
+  "/dashboard/backtest/page": "app/dashboard/backtest/page.js",
+  "/dashboard/docs/page": "app/dashboard/docs/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/portfolio/page": "app/dashboard/portfolio/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
+  "/dashboard/strategies/page": "app/dashboard/strategies/page.js",
+  "/dashboard/trade/page": "app/dashboard/trade/page.js",
   "/page": "app/page.js"
 }

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* TradingView Color Scheme */
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -20,29 +21,41 @@
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
   --ring: 221.2 83.2% 53.3%;
-  --radius: 0.5rem;
+  --radius: 0.25rem;
+
+  /* TradingView specific colors */
+  --tv-background: 222 17% 11%;        /* #131722 */
+  --tv-surface: 224 17% 15%;           /* #1E222D */
+  --tv-surface-elevated: 225 11% 20%;  /* #2A2E39 */
+  --tv-border: 225 9% 25%;             /* #363A45 */
+  --tv-text-primary: 220 13% 85%;      /* #D1D4DC */
+  --tv-text-secondary: 220 9% 55%;     /* #787B86 */
+  --tv-blue: 221 100% 59%;             /* #2962FF */
+  --tv-green: 164 89% 29%;             /* #089981 */
+  --tv-red: 356 85% 55%;               /* #F23645 */
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+  --background: 222 17% 11%;           /* #131722 - TradingView background */
+  --foreground: 220 13% 85%;           /* #D1D4DC - TradingView text */
+  --card: 224 17% 15%;                 /* #1E222D - TradingView panel */
+  --card-foreground: 220 13% 85%;
+  --popover: 224 17% 15%;
+  --popover-foreground: 220 13% 85%;
+  --primary: 221 100% 59%;             /* #2962FF - TradingView blue */
+  --primary-foreground: 220 13% 95%;
+  --secondary: 225 11% 20%;            /* #2A2E39 */
+  --secondary-foreground: 220 13% 85%;
+  --muted: 225 11% 20%;
+  --muted-foreground: 220 9% 55%;      /* #787B86 */
+  --accent: 225 11% 20%;
+  --accent-foreground: 220 13% 85%;
+  --destructive: 356 85% 55%;          /* #F23645 - TradingView red */
+  --destructive-foreground: 220 13% 95%;
+  --border: 225 9% 25%;                /* #363A45 */
+  --input: 225 11% 20%;
+  --ring: 221 100% 59%;
+  --radius: 0.25rem;
 }
 
 * {
@@ -52,6 +65,113 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+}
+
+/* TradingView-style components */
+.tv-panel {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.tv-toolbar {
+  background: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.tv-button {
+  background: transparent;
+  border: none;
+  color: hsl(var(--muted-foreground));
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.tv-button:hover {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+}
+
+.tv-button.active {
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+}
+
+.tv-buy-button {
+  background: hsl(var(--tv-green));
+  color: white;
+  font-weight: 600;
+}
+
+.tv-buy-button:hover {
+  background: hsl(var(--tv-green) / 0.9);
+  color: white;
+}
+
+.tv-sell-button {
+  background: hsl(var(--tv-red));
+  color: white;
+  font-weight: 600;
+}
+
+.tv-sell-button:hover {
+  background: hsl(var(--tv-red) / 0.9);
+  color: white;
+}
+
+.tv-input {
+  background: hsl(var(--input));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.tv-input:focus {
+  border-color: hsl(var(--primary));
+}
+
+.tv-separator {
+  width: 1px;
+  height: 20px;
+  background: hsl(var(--border));
+  margin: 0 4px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Remove default button styles */
+button {
+  font-family: inherit;
 }
 
 .neumorphic-button::after {
