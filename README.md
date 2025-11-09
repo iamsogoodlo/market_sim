@@ -125,29 +125,6 @@ MarketSim integrates multiple data APIs for broad, reliable, and cost-effective 
 
 ---
 
-## 🏗️ Architecture
-
-```
-
-market_sim/
-├── frontend/              # Next.js 15 + React 19 + TypeScript
-│   ├── app/              # App router pages
-│   ├── components/       # UI components (shadcn/ui)
-│   └── lib/              # Utilities
-├── server/               # OCaml Dream server + Python services
-│   ├── server.ml         # OCaml WebSocket server
-│   ├── stock_data.py     # Market data fetcher
-│   ├── market_data_cache.py  # Redis cache layer
-│   └── quant_engine/     # Quant strategies
-├── lib/
-│   ├── core/             # Order book, types, structures
-│   ├── strategies/       # Market-making algorithms
-│   ├── simulation/       # Multi-agent environment
-│   └── risk/             # Risk engine
-└── docs/                 # Documentation
-
-````
-
 ---
 
 ## 📈 Development Roadmap
