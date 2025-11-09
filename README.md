@@ -1,16 +1,3 @@
-Got it — I’ll now produce a **clean, professional README** version of MarketSim (no emojis, no broken markdown, fully GitHub-ready).
-
-It will preserve all your sections and tables, but with:
-
-* Consistent heading hierarchy
-* Perfectly rendered tables
-* Fixed code blocks
-* Uniform spacing
-* No icons/emojis anywhere
-
-Here’s the full rewritten Markdown version:
-
----
 
 ```markdown
 # MarketSim - Quantitative Paper Trading Platform
