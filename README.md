@@ -273,6 +273,3 @@ Paper results do not guarantee real-world returns.
 ---
 
 Built with ❤️ for quantitative traders, developers, and researchers.
-
-```
-```
